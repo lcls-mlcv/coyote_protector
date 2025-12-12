@@ -1,5 +1,12 @@
 ultralytics
 opencv-python
 matplotlib
+seaborn
+pandas
+numpy
+pyyaml
+onnxruntime
+tqdm
+
 
 pip install -r requiremnts.txt
