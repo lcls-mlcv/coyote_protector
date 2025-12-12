@@ -38,9 +38,9 @@ echo "[ENV] VECLIB_MAXIMUM_THREADS=$VECLIB_MAXIMUM_THREADS"
 # ============================================================
 # 2) Paths (edit as needed)
 # ============================================================
-MODEL="/sdf/home/p/pmonteil/optimization_cpp/model_export_optim/best_prak_v8.onnx"
-SRC_IMG_DIR="/sdf/home/p/pmonteil/coyote_protector_test_PL_4/chip_pic_prakriti"
-SCRIPT_DIR="/sdf/home/p/pmonteil/coyote_protector_benchmark/scripts"
+MODEL="/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/example_data_coyote/YOLO_v8.onnx"
+SRC_IMG_DIR="/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/example_data_coyote/example_chip_pics"
+SCRIPT_DIR="./"
 
 SCRIPT_PY="onnx_threads_benchmark.py"
 

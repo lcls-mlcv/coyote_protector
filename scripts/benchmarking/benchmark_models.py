@@ -50,6 +50,7 @@ import seaborn as sns
 # Dataset for YOLO val()
 
 DATA_YAML = "path/to/yolo_dataset.yaml"
+
 # Models to benchmark (update paths as needed)
 # path to models and weights paths with the following format:
 
@@ -61,27 +62,46 @@ MODELS = [
     {"name": "model4", "weights_path": "path/to/runs/detect/train_model4/weights/best.pt"},
 ]
 """
+
 MODELS = []
 # Directory with chip images for speed benchmark
 CHIP_PIC_DIR = "/path/to/chip_pics"
 
+
+# EXAMPLE, uncomment if needed, go fetch data from prjlumine22/results/pmonteil/coyote
+"""
+DATA_YAML = "/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/example_data_coyote/yolo_dataset.yaml"
+
+MODELS = [
+    {"name": "YOLO_v8n", "weights_path": "/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/example_data_coyote/example_models/weights_v8n.pt"},
+    {"name": "YOLO_v8m", "weights_path": "/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/example_data_coyote/example_models/weights_v8m.pt"},
+    {"name": "YOLO_v11n", "weights_path": "/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/example_data_coyote/example_models/weights_v11n.pt"},
+    {"name": "YOLO_v11m", "weights_path": "/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/example_data_coyote/example_models/weights_v11m.pt"},
+]
+
+CHIP_PIC_DIR = "/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/example_data_coyote/example_chip_pics"
+"""
+
+# ============================================================
+# CONSTANTS
+# ============================================================
 # Pixel → micron conversion
 PX_TO_UM = 0.5
 ALERT_UM = 100.0
 
 # Number of repeated runs for speed benchmark
-N_RUNS = 2
+N_RUNS = 5
 
 # Root directory for ALL outputs
 ROOT_BASE = Path("benchmark_models")
 ROOT_BASE.mkdir(parents=True, exist_ok=True)
 
 # Subdirectory for metrics (accuracy)
-METRICS_DIR = ROOT_BASE / "metrics"
+METRICS_DIR = ROOT_BASE / "accuracy_metrics"
 METRICS_DIR.mkdir(parents=True, exist_ok=True)
 
 # Subdirectory for speed runs (inference time, violins, etc.)
-RUNS_DIR = ROOT_BASE / "runs_stats"
+RUNS_DIR = ROOT_BASE / "runs_time_stats"
 RUNS_DIR.mkdir(parents=True, exist_ok=True)
 
 
