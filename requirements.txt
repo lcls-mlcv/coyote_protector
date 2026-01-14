@@ -9,4 +9,4 @@ onnxruntime
 tqdm
 
 
-pip install -r requiremnts.txt
+pip install -r requirments.txt
