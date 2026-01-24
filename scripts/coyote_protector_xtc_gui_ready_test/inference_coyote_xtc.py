@@ -1,18 +1,16 @@
-
-## same as test_xtc/inference_coyote.py but with argument parsing
+#!/usr/bin/env python3
 """
-YOLOv8 Inference Script → CSV (sizes)
+YOLOv8 Inference Script → CSV (sizes) + above-threshold CSV
 ------------------------------------------------------------
 - Runs YOLO inference on a folder of images
 - Computes longest side per detection in px and μm
 - Flags detections larger than a given μm threshold
+- Writes:
+    1) results_csv/measurements_complete.csv  (ALL detections)
+    2) results_csv/measurements_above_threshold.csv (ONLY detections above threshold)
 
 USAGE:
     python inference_coyote_xtc.py <chip_pic_dir>
-
-EDIT THESE BEFORE RUNNING:
- - weights_path: Path to your trained YOLO weights (.pt)
- - px_to_um:     Pixel-to-micron conversion factor for your setup
 """
 
 import os
@@ -37,27 +35,23 @@ if not os.path.isdir(chip_pic_dir):
 # Paths / parameters
 # -------------------------
 weights_path = (
-    "/sdf/home/p/pmonteil/coyote_protector_test_PL_labeling_tries_v3_run61_mfx101346325_200_random/scripts/runs/detect/train_150epochs_v11_merged/weights/best.pt"
+    "/sdf/home/p/pmonteil/coyote_protector_test_PL_labeling_tries_v3_run61_mfx101346325_200_random/scripts/"
+    "runs/detect/train_150epochs_v11_merged/weights/best.pt"
 )
-
-'''
-weights_path = (
-    "/sdf/home/p/pmonteil/prjlumine22/results/pmonteil/"
-    "coyote_beamtime_19jan/weight_yolov11n_150epochs.pt"
-)
-'''
 
 mag_factor = 5.56     # optical magnification
 px_size = 3.45        # pixel size (μm)
-dowsamp_factor = 2  # if images were downsampled before inference
-px_to_um = px_size*dowsamp_factor / mag_factor
-alert_um = 50.0 #threshold, in μm, above which to flag detections
+dowsamp_factor = 2    # if images were downsampled before inference
+px_to_um = px_size * dowsamp_factor / mag_factor
+alert_um = 50.0       # threshold, in μm, above which to flag detections
 
 # Output CSV directory
-#out_dir = Path("runs/size_measurements")
 out_dir = Path("results_csv")
 out_dir.mkdir(parents=True, exist_ok=True)
-csv_path = out_dir / "measurements.csv"
+
+csv_all_tmp = out_dir / "measurements.csv"
+csv_all_final = out_dir / "measurements_complete.csv"
+csv_above = out_dir / "measurements_above_threshold.csv"
 
 # -------------------------
 # Load model
@@ -74,24 +68,32 @@ results = model.predict(
 )
 
 # -------------------------
-# Write CSV
+# CSV header
 # -------------------------
-with open(csv_path, "w", newline="") as f:
-    writer = csv.writer(f)
-    writer.writerow([
-        "image",
-        "det_idx",
-        "class_id",
-        "class_name",
-        "confidence",
-        "x_center_px",
-        "y_center_px",
-        "width_px",
-        "height_px",
-        "longest_px",
-        "longest_um",
-        "alert"
-    ])
+header = [
+    "image",
+    "det_idx",
+    "class_id",
+    "class_name",
+    "confidence",
+    "x_center_px",
+    "y_center_px",
+    "width_px",
+    "height_px",
+    "longest_px",
+    "longest_um",
+    "alert"
+]
+
+# -------------------------
+# Write BOTH CSVs
+# -------------------------
+with open(csv_all_tmp, "w", newline="") as f_all, open(csv_above, "w", newline="") as f_above:
+    w_all = csv.writer(f_all)
+    w_above = csv.writer(f_above)
+
+    w_all.writerow(header)
+    w_above.writerow(header)
 
     for r in results:
         img_name = os.path.basename(r.path)
@@ -111,14 +113,16 @@ with open(csv_path, "w", newline="") as f:
             cls_name = model.names.get(cls_id, str(cls_id))
             conf = float(confs[i]) if confs.size > i else float("nan")
 
-            alert_flag = "STOP" if longest_um > alert_um else ""
-            if alert_flag:
+            is_above = longest_um > alert_um
+            alert_flag = "STOP" if is_above else ""
+
+            if is_above:
                 print(
                     f"[STOP] {img_name} — det {i+1}: "
                     f"{longest_um:.2f} μm > {alert_um} μm → Stop the beam"
                 )
 
-            writer.writerow([
+            row = [
                 img_name,
                 i + 1,
                 cls_id,
@@ -131,12 +135,21 @@ with open(csv_path, "w", newline="") as f:
                 f"{longest_px:.2f}",
                 f"{longest_um:.2f}",
                 alert_flag
-            ])
+            ]
 
-print(f"\nCSV saved to: {csv_path}")
+            # Write to "all detections"
+            w_all.writerow(row)
 
-# Rename CSV after completion
-final_csv_path = out_dir / "measurements_complete.csv"
-csv_path.rename(final_csv_path)
+            # Write to "above threshold only"
+            if is_above:
+                w_above.writerow(row)
 
-print(f"CSV renamed to: {final_csv_path}")
+print(f"\nCSV (all) saved to: {csv_all_tmp}")
+print(f"CSV (above threshold only) saved to: {csv_above}")
+
+# Rename "all" CSV after completion
+if csv_all_final.exists():
+    csv_all_final.unlink()
+csv_all_tmp.rename(csv_all_final)
+
+print(f"CSV (all) renamed to: {csv_all_final}")
