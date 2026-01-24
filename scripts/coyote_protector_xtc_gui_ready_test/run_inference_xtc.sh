@@ -22,6 +22,8 @@ echo "[SLURM] Host: $(hostname)"
 echo "[SLURM] CUDA_VISIBLE_DEVICES: ${CUDA_VISIBLE_DEVICES:-"(not set)"}"
 echo "[SLURM] Starting job..."
 
+YOLO_PYTHON="/sdf/data/lcls/ds/prj/prjlumine22/results/coyote_protector/miniconda3_coyote/envs/env_coyote/bin/python"
+
 # -------  DEFAULT INPUTS ---------
 RUN_NUMBER=61
 USE_NORMALIZED=1
@@ -53,11 +55,11 @@ else
 fi
 
 echo "[STEP 1/2] Running inference_coyote_xtc.py"
-python ./inference_coyote_xtc.py "${IMAGE_DIR}"
+"${YOLO_PYTHON}" ./inference_coyote_xtc.py "${IMAGE_DIR}"
 
 echo
 echo "[STEP 2/2] Running merge_crystals_data.py"
-python ./merge_crystals_data.py "${RUN_NUMBER}"
+"${YOLO_PYTHON}" ./merge_crystals_data.py "${RUN_NUMBER}"
 
 echo
 echo "[SLURM] Inference and merging completed successfully."

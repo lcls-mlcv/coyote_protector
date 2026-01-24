@@ -23,6 +23,7 @@ echo "[SLURM] CUDA_VISIBLE_DEVICES: ${CUDA_VISIBLE_DEVICES:-"(not set)"}"
 echo "[SLURM] Starting job..."
 
 PSCONDA_SH="/sdf/group/lcls/ds/ana/sw/conda2/manage/bin/psconda.sh"
+YOLO_PYTHON="/sdf/data/lcls/ds/prj/prjlumine22/results/coyote_protector/miniconda3_coyote/envs/env_coyote/bin/python"
 
 # -------  DEFAULT INPUTS ---------
 RUN_NUMBER=61
@@ -60,6 +61,16 @@ echo "[ARGS] run=${RUN_NUMBER} exp=${EXP_NUMBER} save_norm=${SAVE_NORMALIZED} ma
 echo
 
 # ====================================
+# NEW STEP 0: Create run folder and cd into it
+# ====================================
+RUN_DIR="run_${RUN_NUMBER}"
+mkdir -p "${RUN_DIR}"
+cd "${RUN_DIR}"
+
+echo "[STEP 0/3] Created and entered: $(pwd)"
+echo
+
+# ====================================
 # STEP 1: Export XTC Data
 # ====================================
 echo "[STEP 1/3] Running export_xtc_normalized_args.py"
@@ -67,7 +78,8 @@ set +u
 source "${PSCONDA_SH}"
 set -u
 
-python ./export_xtc_normalized_args.py "${RUN_NUMBER}" "${EXP_NUMBER}" "${SAVE_NORMALIZED}" "${MAX_EVENTS}"
+# run from parent directory (scripts live one level up)
+python ../export_xtc_normalized_args.py "${RUN_NUMBER}" "${EXP_NUMBER}" "${SAVE_NORMALIZED}" "${MAX_EVENTS}"
 
 echo "[STEP 1/3] Export completed."
 echo
@@ -77,14 +89,14 @@ echo
 # ====================================
 echo "[STEP 2/3] Running inference_coyote_xtc.py"
 
-# Determine which image directory to use
+# Determine which image directory to use (now relative to run_${RUN_NUMBER}/)
 if [ "${USE_NORMALIZED}" = "1" ]; then
-    IMAGE_DIR="run_${RUN_NUMBER}/run_${RUN_NUMBER}_png_norm"
+    IMAGE_DIR="run_${RUN_NUMBER}_png_norm"
 else
-    IMAGE_DIR="run_${RUN_NUMBER}/run_${RUN_NUMBER}_png"
+    IMAGE_DIR="run_${RUN_NUMBER}_png"
 fi
 
-python ./inference_coyote_xtc.py "${IMAGE_DIR}"
+"${YOLO_PYTHON}" ../inference_coyote_xtc.py "${IMAGE_DIR}"
 
 echo "[STEP 2/3] Inference completed."
 echo
@@ -93,10 +105,10 @@ echo
 # STEP 3: Merge Results
 # ====================================
 echo "[STEP 3/3] Running merge_crystals_data.py"
-python ./merge_crystals_data.py "${RUN_NUMBER}"
+"${YOLO_PYTHON}" ../merge_crystals_data.py "${RUN_NUMBER}"
 
 echo "[STEP 3/3] Merging completed."
 echo
 
 echo "[SLURM] Complete workflow finished successfully."
-echo "Results saved to: run_${RUN_NUMBER}/results_csv/"
+echo "Results saved to: ${RUN_DIR}/results_csv/"
