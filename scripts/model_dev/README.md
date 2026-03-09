@@ -48,7 +48,7 @@ pip install ultralytics opencv-python matplotlib scikit-learn numpy
 Shared environment path:
 
 ```bash
-/sdf/data/lcls/ds/prj/prjlumine22/results/coyote_protector/miniconda3_coyote/envs/env_coyote/
+conda activate /sdf/data/lcls/ds/prj/prjlumine22/results/coyote_protector/miniconda3_coyote/envs/env_coyote/
 ```
 
 Use this option only if you are in (or have access to) the `prjlumine22` group.
@@ -88,7 +88,7 @@ labelme path/to/images/
 
 Labeling notes:
 - For now, labeling is done locally (not on S3DF).
-- Example image folder: `/sdf/home/p/pmonteil/data_coyote/images_prakriti_s3df`.
+- Example image folder: `/sdf/home/p/pmonteil/data_coyote/images_prakriti_s3df`, those can be downloaded on your personnal device
 - If LabelMe has compatibility issues, downgrade numpy:
 
 ```bash
@@ -101,7 +101,20 @@ pip install "numpy==1.24.*"
 - Save JSON annotations.
 - Draw boxes manually or use AI prompt/SAM tools in LabelMe
 - Adjust score/IoU thresholds as needed
-- Save annotations in `.json`
+- Save annotations in `.json` (you will have one `.json` per image).
+- Then merge all LabelMe JSON files into one COCO-like JSON with:
+	- `scripts/model_dev/utilities/converter.py`
+- Before running the converter, update:
+	- `LABELME_DIR`: folder containing all LabelMe JSON files on your device
+	- `OUT_JSON`: output COCO-like JSON path on your device.
+	- `ROOT_PREFIX`: prefix of the coyote image folder on the machine where you run training; if this is wrong, `file_name` paths will break.
+- Run converter locally:
+
+```bash
+python scripts/model_dev/utilities/converter.py
+```
+
+- Use the generated COCO JSON as `coco_json_path` in `prepare_dataset.py`.
 - Transfer labeled data to S3DF if needed:
 
 ```bash
@@ -124,7 +137,7 @@ Practical project flow:
 - Clone the repository:
 
 ```bash
-git clone path/to/coyote_protector.git
+git clone git@github.com:lcls-mlcv/coyote_protector.git
 cd path/to/coyote_protector
 ```
 
@@ -169,7 +182,7 @@ Run:
 /sdf/data/lcls/ds/prj/prjlumine22/results/coyote_protector/miniconda3_coyote/envs/env_coyote/bin/python training.py
 ```
 
-If you are using your own environment, run instead:
+If you are using your own environment, activate it and run instead:
 
 ```bash
 python training.py
