@@ -35,15 +35,6 @@ You have two options:
 
 ### Option A: Create your own environment
 
-On S3DF (or any Linux machine):
-
-```bash
-conda create --name coyote_env python=3.10
-conda activate coyote_env
-conda install pytorch torchvision torchaudio cudatoolkit=12.2 -c pytorch
-pip install ultralytics opencv-python matplotlib scikit-learn numpy
-```
-
 Optional (if using S3DF and Miniconda is not installed yet):
 
 ```bash
@@ -61,6 +52,17 @@ init_conda () {
 }
 init_conda
 ```
+
+On S3DF (or any Linux machine):
+
+```bash
+conda create --name coyote_env python=3.10
+conda activate coyote_env
+conda install pytorch torchvision torchaudio cudatoolkit=12.2 -c pytorch
+pip install ultralytics opencv-python matplotlib scikit-learn numpy
+```
+
+
 
 ### Option B: Use the shared environment (if authorized)
 
@@ -94,7 +96,7 @@ labelme path/to/images/
 
 Labeling notes:
 - For now, labeling is done locally (not on S3DF).
-- Example image folder: `/sdf/home/p/pmonteil/data_coyote/images_prakriti_s3df`, those can be downloaded on your personnal device
+- Example image folder: `/sdf/home/p/pmonteil/data_coyote/images_prakriti_s3df`, those can be downloaded on your personal device
 - If LabelMe has compatibility issues, downgrade numpy:
 
 ```bash
