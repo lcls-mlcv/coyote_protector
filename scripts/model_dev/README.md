@@ -127,29 +127,21 @@ python scripts/model_dev/utilities/converter.py
 scp -r path/to/labeled_dataset username@s3dflogin.slac.stanford.edu:path/to/project
 ```
 
-Before training, keep a YOLO-compatible layout:
-
-```text
-images/
-	train/
-	val/
-labels/
-	train/
-	val/
-```
-
-Practical project flow:
-
-- Clone the repository:
-
-```bash
-git clone git@github.com:lcls-mlcv/coyote_protector.git
-cd path/to/coyote_protector
-```
-
 - Put your annotation file in the training workspace (example):
   - `path/to/test_training/dataset.json`
-- Run the converter script (`prepare_dataset.py`) after updating all 7 path variables.
+
+
+Before training, your dataset must be organized into a YOLO-compatible folder structure:
+``` bash
+├── images/
+│   ├── train/        ← training images
+│   └── val/          ← validation images
+├── labels/
+│   ├── train/        ← Corresponding .txt label files
+│   └── val/          
+```
+
+- To do so, run the dataset preparation script (`prepare_dataset.py`) after updating all 7 path variables.
 
 Edit paths at the top of `prepare_dataset.py`:
 
