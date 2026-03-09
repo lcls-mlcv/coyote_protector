@@ -6,7 +6,7 @@ from pathlib import Path
 
 # ======== EDIT THESE PATHS ========
 LABELME_DIR = r"path/to/labelme_json_files" #can be on local device
-OUT_JSON    = r"path/to/output/dataset.json" #can be on local deivice
+OUT_JSON    = r"path/to/output/dataset.json" #can be on local device
 # Root prefix for COCO "file_name" entries:
 ROOT_PREFIX = "path/to/coyote_image_folder_prefix" #on sdf
 # ==================================
