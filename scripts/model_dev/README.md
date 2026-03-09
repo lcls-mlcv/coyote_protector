@@ -23,6 +23,7 @@ The workflow mirrors the main project idea: detect crystals from microscopy imag
 - `training.py`: Trains a YOLOv8 model (default: `yolov8n.pt`).
 - `inference.py`: Runs inference, saves YOLO-rendered predictions, and exports detection size metrics to CSV.
 - `eval_accuracy.py`: Runs validation and prints `mAP50`, precision, and recall.
+- `utilities/`: Helper scripts for dataset tooling, including LabelMe-to-COCO conversion.
 - `benchmarking/`: Optional speed/throughput benchmarking utilities.
 
 ## 1. Environment Setup
@@ -43,22 +44,6 @@ conda install pytorch torchvision torchaudio cudatoolkit=12.2 -c pytorch
 pip install ultralytics opencv-python matplotlib scikit-learn numpy
 ```
 
-### Option B: Use the shared environment (if authorized)
-
-Shared environment path:
-
-```bash
-conda activate /sdf/data/lcls/ds/prj/prjlumine22/results/coyote_protector/miniconda3_coyote/envs/env_coyote/
-```
-
-Use this option only if you are in (or have access to) the `prjlumine22` group.
-
-From the repository root:
-
-```bash
-cd path/to/coyote_protector
-```
-
 Optional (if using S3DF and Miniconda is not installed yet):
 
 ```bash
@@ -77,7 +62,28 @@ init_conda () {
 init_conda
 ```
 
-## 2. Dataset Preparation
+### Option B: Use the shared environment (if authorized)
+
+Shared environment path:
+
+```bash
+conda activate /sdf/data/lcls/ds/prj/prjlumine22/results/coyote_protector/miniconda3_coyote/envs/env_coyote/
+```
+
+Use this option only if you are in (or have access to) the `prjlumine22` group.
+
+
+
+## 2. Cloning the repo 
+
+- Clone the repository:
+
+```bash
+git clone git@github.com:lcls-mlcv/coyote_protector.git
+cd path/to/coyote_protector
+```
+
+## 3. Dataset Preparation
 
 If you are retraining with new data, label images first:
 
@@ -169,7 +175,7 @@ Expected output:
 - Grayscale 3-channel images for train and val
 - `yolo_dataset.yaml`
 
-## 3. Training
+## 4. Training
 
 Edit `training.py`:
 
@@ -195,7 +201,7 @@ Default YOLO output directory:
 - `runs/detect/train/weights/best.pt`
 - subsequent runs: `train2`, `train3`, etc.
 
-## 4. Inference + Size Alert CSV
+## 5. Inference + Size Alert CSV
 
 Edit `inference.py`:
 
@@ -221,7 +227,7 @@ Outputs:
 
 <img width="1201" height="614" alt="Screenshot 2025-07-21 at 3 08 19 PM" src="https://github.com/user-attachments/assets/f030985e-ce8f-454a-8050-8ff9f076d446" />
 
-## 5. Model Evaluation
+## 6. Model Evaluation
 
 Edit `eval_accuracy.py`:
 
