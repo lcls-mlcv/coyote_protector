@@ -171,8 +171,8 @@ Expected output:
 
 Edit `training.py`:
 
-- `data=` should point to your generated `yolo_dataset.yaml`
-- tune `epochs`, `imgsz`, and `batch` as needed
+- `data=` should point to your generated `yolo_dataset.yaml` which must be modified to have the right path to training and validation images.
+- tune `epochs`, `imgsz`, and `batch` as needed (default parameters are fine for `imgsz` and `batch`)
 
 Run:
 
@@ -245,12 +245,6 @@ The `benchmarking/` directory contains additional utilities for model and ONNX t
 See:
 
 - `scripts/model_dev/benchmarking/README.md`
-
-## C++ Inference with ONNX Runtime
-
-This repository also includes a C++ implementation in `yolov8_cpp/` for YOLO inference with ONNX Runtime and OpenCV. See:
-
-- `path/to/coyote_protector/yolov8_cpp/README.md`
 
 ## Typical Run Order
 
