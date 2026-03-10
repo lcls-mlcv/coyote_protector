@@ -73,7 +73,7 @@ sbatch run_benchmark_turing.sh
 - Violin (pooled image times): `benchmark_all_dataset/runs_stats/violin_image_pooled_by_build.png`
 - Violin (image mean times): `benchmark_all_dataset/runs_stats/violin_image_means_by_build.png`
 
-<img width="1201" alt="All Dataset Pareto" src="benchmark_all_dataset/pareto_speed_accuracy.png" />
+<img width="2400" height="1800" alt="image" src="https://github.com/user-attachments/assets/aad16d12-a2e0-401f-bf47-cbd4857cbc24" />
 
 ### Rod Only (`benchmark_rod_only`)
 - Pareto: `benchmark_rod_only/pareto_speed_accuracy.png`
@@ -82,7 +82,8 @@ sbatch run_benchmark_turing.sh
 - Violin (pooled image times): `benchmark_rod_only/runs_stats/violin_image_pooled_by_build.png`
 - Violin (image mean times): `benchmark_rod_only/runs_stats/violin_image_means_by_build.png`
 
-<img width="1201" alt="Rod Only Pareto" src="benchmark_rod_only/pareto_speed_accuracy.png" />
+<img width="2400" height="1800" alt="image" src="https://github.com/user-attachments/assets/5d82e9ab-1d21-465e-a7b1-7f9dfa2aea9d" />
+
 
 ### SharpB Only (`benchmark_sharpB_only`)
 - Pareto: `benchmark_sharpB_only/pareto_speed_accuracy.png`
@@ -91,7 +92,8 @@ sbatch run_benchmark_turing.sh
 - Violin (pooled image times): `benchmark_sharpB_only/runs_stats/violin_image_pooled_by_build.png`
 - Violin (image mean times): `benchmark_sharpB_only/runs_stats/violin_image_means_by_build.png`
 
-<img width="1201" alt="SharpB Only Pareto" src="benchmark_sharpB_only/pareto_speed_accuracy.png" />
+<img width="2400" height="1800" alt="image" src="https://github.com/user-attachments/assets/0c466aaa-915a-4e28-a502-173a0150e08f" />
+
 
 ## 6) Notes
 
