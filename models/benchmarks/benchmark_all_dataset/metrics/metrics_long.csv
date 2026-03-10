@@ -1,0 +1,13 @@
+Model,Metric,Value
+yolov11n_2C,mAP50,0.917798973517449
+yolov11n_2C,Precision,0.9084769309729619
+yolov11n_2C,Recall,0.8426939989887363
+yolov8n_2C,mAP50,0.9192067902894168
+yolov8n_2C,Precision,0.8841437213283807
+yolov8n_2C,Recall,0.8896595444235826
+yolo11n_rodes,mAP50,0.0020523496399282395
+yolo11n_rodes,Precision,0.010460856649844384
+yolo11n_rodes,Recall,0.03608247422680412
+yolov11n_sharpB_recent,mAP50,0.341810685226765
+yolov11n_sharpB_recent,Precision,0.33391756195712846
+yolov11n_sharpB_recent,Recall,0.3711340206185567
