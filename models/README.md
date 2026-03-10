@@ -21,10 +21,10 @@ The benchmark in this folder uses local copied weights:
 
 | Model Name | Family | Weights Path | Trained On Dataset | Training Dataset Path |
 |---|---|---|---|---|
-| `yolov11n_2C` | YOLOv11n | `weights/yolov11n_2C_best.pt` | `all_datasets_merged_v4` (merged run104,mfx101232725  + run61 mfx101346325 + previous images) | `/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/datasets/all_datasets_merged_v4` |
-| `yolov8n_2C` | YOLOv8n | `weights/yolov8n_2C_best.pt` | `all_datasets_merged_v4` (merged run104,mfx101232725 + run61,mfx101346325 + previous images) | `/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/datasets/all_datasets_merged_v4` |
-| `yolo11n_rods` | YOLOv11n | `weights/yolo11n_rods_best.pt` | `rod_run104_mfx101232725_only` | `/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/datasets/rod_run104_mfx101232725_only` |
-| `yolov11n_sharpB_recent` | YOLOv11n | `weights/yolov11n_sharpB_recent_best.pt` | `sharpb_run61_mfx101346325_only` | `/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/datasets/sharpb_run61_mfx101346325_only` |
+| `yolov11n_2C` | YOLOv11n | `/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/latest_weights/yolov11n_2C_best.pt` | `all_datasets_merged_v4` (merged run104,mfx101232725  + run61 mfx101346325 + previous images) | `/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/datasets/all_datasets_merged_v4` |
+| `yolov8n_2C` | YOLOv8n | `/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/latest_weights/yolov8n_2C_best.pt` | `all_datasets_merged_v4` (merged run104,mfx101232725 + run61,mfx101346325 + previous images) | `/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/datasets/all_datasets_merged_v4` |
+| `yolo11n_rods` | YOLOv11n | `/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/latest_weights/yolo11n_rods_best.pt` | `rod_run104_mfx101232725_only` | `/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/datasets/rod_run104_mfx101232725_only` |
+| `yolov11n_sharpB_recent` | YOLOv11n | `/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/latest_weights/yolov11n_sharpB_recent_best.pt` | `sharpb_run61_mfx101346325_only` | `/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/datasets/sharpb_run61_mfx101346325_only` |
 
 Note: if the models have to be retrained: 
 - Please refer to `coyote_protector/scripts/model_dev/README.md`
