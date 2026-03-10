@@ -73,7 +73,7 @@ sbatch run_benchmark_turing.sh
 - Violin (pooled image times): `benchmark_all_dataset/runs_stats/violin_image_pooled_by_build.png`
 - Violin (image mean times): `benchmark_all_dataset/runs_stats/violin_image_means_by_build.png`
 
-<img width="1200" height="900" alt="image" src="https://github.com/user-attachments/assets/aad16d12-a2e0-401f-bf47-cbd4857cbc24" />
+<img width="600" height="450" alt="image" src="https://github.com/user-attachments/assets/aad16d12-a2e0-401f-bf47-cbd4857cbc24" />
 
 ### Rod Only (`benchmark_rod_only`)
 - Pareto: `benchmark_rod_only/pareto_speed_accuracy.png`
