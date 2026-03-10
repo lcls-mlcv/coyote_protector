@@ -48,29 +48,29 @@ import seaborn as sns
 # ============================================================
 
 # Dataset for YOLO val()
-DATA_YAML = "/sdf/home/p/pmonteil/coyote_protector_test_PL_labeling_tries_v4_merged_run104_mfx101232725_run61_mfx101346325/dataset/yolo_dataset.yaml"
+DATA_YAML = "/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/datasets/all_datasets_merged_v4/dataset/yolo_dataset.yaml"
 
 # Models to benchmark (update paths as needed)
 MODELS = [
     {
         "name": "yolov11n_2C",
-        "weights_path": "/sdf/home/p/pmonteil/coyote_protector/models/weights/yolov11n_2C_best.pt",
+        "weights_path": "/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/latest_weights/yolov11n_2C_best.pt",
     },
     {
         "name": "yolov8n_2C",
-        "weights_path": "/sdf/home/p/pmonteil/coyote_protector/models/weights/yolov8n_2C_best.pt",
+        "weights_path": "/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/latest_weights/yolov8n_2C_best.pt",
     },
     {
-        "name": "yolo11n_rodes",
-        "weights_path": "/sdf/home/p/pmonteil/coyote_protector/models/weights/yolo11n_rodes_best.pt",
+        "name": "yolo11n_rods",
+        "weights_path": "/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/latest_weights/yolo11n_rods_best.pt",
     },
     {
         "name": "yolov11n_sharpB_recent",
-        "weights_path": "/sdf/home/p/pmonteil/coyote_protector/models/weights/yolov11n_sharpB_recent_best.pt",
+        "weights_path": "/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/latest_weights/yolov11n_sharpB_recent_best.pt",
     },
 ]
 # Directory with chip images for speed benchmark
-CHIP_PIC_DIR = "/sdf/home/p/pmonteil/coyote_protector_test_PL_labeling_tries_v3_run61_mfx101346325_200_random/chip_pic_prakritis_run61_200_random_merged"
+CHIP_PIC_DIR = "/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/datasets/chip_pic_prakriti/chip_pics"
 
 # Pixel → micron conversion
 PX_TO_UM = 0.5
