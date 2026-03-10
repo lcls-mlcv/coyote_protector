@@ -82,18 +82,32 @@ sbatch benchmarks/run_benchmark_turing.sh
 - Violin (pooled image times): `benchmarks/benchmark_rod_only/runs_stats/violin_image_pooled_by_build.png`
 - Violin (image mean times): `benchmarks/benchmark_rod_only/runs_stats/violin_image_means_by_build.png`
 
+<<<<<<< HEAD
 <img width="600" height="450" alt="image" src="https://github.com/user-attachments/assets/5d82e9ab-1d21-465e-a7b1-7f9dfa2aea9d" />
+=======
+<img width="600" height="450" alt="image" src="https://github.com/user-attachments/assets/aad16d12-a2e0-401f-bf47-cbd4857cbc24" />
+>>>>>>> d7d22be76ee4e72577036b06e0c09ea490d6bc3b
 
 
+<<<<<<< HEAD
 ### SharpB Only (`benchmarks/benchmark_sharpB_only`)
 - Pareto: `benchmarks/benchmark_sharpB_only/pareto_speed_accuracy.png`
 - Metrics histogram: `benchmarks/benchmark_sharpB_only/metrics/metrics_histogram_seaborn.png`
 - Violin (run-level): `benchmarks/benchmark_sharpB_only/runs_stats/violin_runs_by_build.png`
 - Violin (pooled image times): `benchmarks/benchmark_sharpB_only/runs_stats/violin_image_pooled_by_build.png`
 - Violin (image mean times): `benchmarks/benchmark_sharpB_only/runs_stats/violin_image_means_by_build.png`
+=======
+<img width="600" height="450" alt="image" src="https://github.com/user-attachments/assets/5d82e9ab-1d21-465e-a7b1-7f9dfa2aea9d" />
+
+>>>>>>> d7d22be76ee4e72577036b06e0c09ea490d6bc3b
 
 <img width="600" height="450" alt="image" src="https://github.com/user-attachments/assets/0c466aaa-915a-4e28-a502-173a0150e08f" />
 
+<<<<<<< HEAD
+=======
+<img width="600" height="450" alt="image" src="https://github.com/user-attachments/assets/0c466aaa-915a-4e28-a502-173a0150e08f" />
+
+>>>>>>> d7d22be76ee4e72577036b06e0c09ea490d6bc3b
 
 ## 6) Notes
 
