@@ -82,7 +82,7 @@ sbatch run_benchmark_turing.sh
 - Violin (pooled image times): `benchmark_rod_only/runs_stats/violin_image_pooled_by_build.png`
 - Violin (image mean times): `benchmark_rod_only/runs_stats/violin_image_means_by_build.png`
 
-<img width="1200" height="900" alt="image" src="https://github.com/user-attachments/assets/5d82e9ab-1d21-465e-a7b1-7f9dfa2aea9d" />
+<img width="600" height="450" alt="image" src="https://github.com/user-attachments/assets/5d82e9ab-1d21-465e-a7b1-7f9dfa2aea9d" />
 
 
 ### SharpB Only (`benchmark_sharpB_only`)
@@ -92,7 +92,7 @@ sbatch run_benchmark_turing.sh
 - Violin (pooled image times): `benchmark_sharpB_only/runs_stats/violin_image_pooled_by_build.png`
 - Violin (image mean times): `benchmark_sharpB_only/runs_stats/violin_image_means_by_build.png`
 
-<img width="1200" height="900" alt="image" src="https://github.com/user-attachments/assets/0c466aaa-915a-4e28-a502-173a0150e08f" />
+<img width="600" height="450" alt="image" src="https://github.com/user-attachments/assets/0c466aaa-915a-4e28-a502-173a0150e08f" />
 
 
 ## 6) Notes
