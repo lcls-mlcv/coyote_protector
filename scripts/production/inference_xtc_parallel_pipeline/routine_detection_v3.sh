@@ -17,8 +17,8 @@ CAMERA_NAME="inline_alvium"
 # --------------------------------
 
 DEST_HOST="psana.sdf.slac.stanford.edu"
-SDF_BASE="/sdf/data/lcls/ds/mfx/exp_id/results/your/folder/to/process/"  # <-- UPDATE THIS PATH TO YOUR SDF WORKING DIRECTORY
-RESULTS_BACK_BASE="path/to/results_back_on_cds"  # <-- UPDATE THIS PATH TO YOUR LOCAL RESULTS DIRECTORY
+SDF_BASE="/sdf/data/lcls/ds/mfx/${EXP_NUMBER}/results/coyote_protector/scripts/production/inference_xtc_parallel_pipeline"  # <-- UPDATE THIS PATH TO YOUR SDF WORKING DIRECTORY
+RESULTS_BACK_BASE="/cds/data/iocDatas/..../..../"  # <-- UPDATE THIS PATH TO YOUR LOCAL RESULTS DIRECTORY
 
 # -------  PARSE key=value arguments ---------
 for arg in "$@"; do

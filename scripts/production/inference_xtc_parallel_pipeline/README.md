@@ -27,16 +27,19 @@ Note: it is recommended to use a folder with significant storage, like the exper
 git clone git@github.com:lcls-mlcv/coyote_protector.git
 cd /sdf/data/lcls/ds/mfx/exp_id/results/your/folder/to/process/images/coyote_protector/scripts/production/inference_xtc_parallel_pipeline
 ```
-Now that the folder is on SDF, update these values in `routine_detection_v3.sh`:
- 
-- `SDF_BASE`: set to the folder you copied on SDF (for example `/sdf/data/lcls/ds/mfx/exp_id/results/your/folder/to/process/images/coyote_protector/scripts/production/inference_xtc_parallel_pipeline`)
-- `RESULTS_BACK_BASE`: set to the CDS folder where you want CSV results stored.
+Now that the folder is on SDF, verify these values in `routine_detection_v3.sh`:
+
+- `DEST_HOST="psana.sdf.slac.stanford.edu"`
+- `SDF_BASE="/sdf/data/lcls/ds/mfx/${EXP_NUMBER}/results/coyote_protector/scripts/production/inference_xtc_parallel_pipeline"`
+- `RESULTS_BACK_BASE="/cds/data/iocDatas/..../..../"`
+
+The SDF path is derived from `EXP_NUMBER`. The CDS destination should be updated to the local folder where you want CSV results copied back.
 
 3) Rsync that SDF folder to CDS.
 Connect to CDS and go to your CDS folder where you want final results stored, then run:
 
 ```bash
-rsync -av "${USER_NAME}@${DEST_HOST}:/sdf/data/lcls/ds/mfx/exp_id/results/your/folder/to/process/images/coyote_protector/scripts/production/inference_xtc_parallel_pipeline/" ./
+rsync -av "${USER_NAME}@${DEST_HOST}:/sdf/data/lcls/ds/mfx/${EXP_NUMBER}/results/coyote_protector/scripts/production/inference_xtc_parallel_pipeline/" ./
 ```
 
 4) (Optional) Passwordless SSH setup (CDS -> SDF)
@@ -133,7 +136,7 @@ Note : you must have the access to those partitions/ressources
 - YOLO python binary used by worker:
   - `YOLO_PYTHON=/sdf/data/lcls/ds/prj/prjlumine22/results/coyote_protector/miniconda3_coyote/envs/env_coyote/bin/python`
 
-Note : you must have the access to prjlumine22 to use this environment.
+Note : you must have the access to prjlumine22 to use this environment, will be build in lcls-tools soon.
 
 ### 3) YOLO model + calibration
 
@@ -152,6 +155,11 @@ In `routine_detection_v3.sh`, verify:
 - `SDF_BASE`
 - `RESULTS_BACK_BASE`
 - `DEST_HOST`
+
+Default values:
+- `DEST_HOST="psana.sdf.slac.stanford.edu"`
+- `SDF_BASE="/sdf/data/lcls/ds/mfx/${EXP_NUMBER}/results/coyote_protector/scripts/production/inference_xtc_parallel_pipeline"`
+- `RESULTS_BACK_BASE="/cds/data/iocDatas/..../..../"`
 
 ---
 

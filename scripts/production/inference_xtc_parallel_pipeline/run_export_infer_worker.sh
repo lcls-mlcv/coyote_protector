@@ -11,8 +11,10 @@
 #SBATCH --error=logs_export/export_infer_worker_%j.err
 
 set -euo pipefail
-
+# Python environment and script paths
 PSCONDA_SH="/sdf/group/lcls/ds/ana/sw/conda2/manage/bin/psconda.sh"
+
+#YOLO's conda environment with PyTorch and dependencies for inference, has to be build in lcls-tools
 YOLO_PYTHON="/sdf/data/lcls/ds/prj/prjlumine22/results/coyote_protector/miniconda3_coyote/envs/env_coyote/bin/python"
 
 # Defaults (overridden via args)
