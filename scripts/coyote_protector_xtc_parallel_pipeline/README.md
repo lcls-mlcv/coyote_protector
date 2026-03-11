@@ -11,7 +11,6 @@ This requires loading code on both SDF and psdev and updating a few configuratio
 
 ## Quick setup on SDF and sync to psdev
 
-
 1) Create a folder on SDF in your experiment results area.
 
 This folder will host the code to process the data (xtc export, slice and post-process with YOLO) and the output of the processing (annotated images and .csv) will be stored there.
@@ -38,10 +37,6 @@ Connect to psdev and go to your CDS folder where you want final results stored, 
 
 ```bash
 rsync -av "${USER_NAME}@${DEST_HOST}:/sdf/data/lcls/ds/mfx/exp_id/results/your/folder/to/process/images/coyote_protector_xtc_parallel_pipeline/" ./
-```
-
-```bash
-python bash_launcher.py --user=<username> --run_number=<run_number> --exp_number=<experiment_id> --max_events=<max_events> --num_parts=<num_parts> > quick_run.log &
 ```
 
 4) (Optional) Passwordless SSH setup (psdev -> SDF)
@@ -101,6 +96,18 @@ If the setup is correct, the login should not ask for a password.
 
 ---
 
+5) Run the routine
+
+- Source the environment on psdev : 
+```bash
+source /cds/group/pcds/pyps/conda/pcds_conda
+```
+
+- Then run :
+```bash
+python bash_launcher.py --user=<username> --run_number=<run_number> --exp_number=<experiment_id> --max_events=<max_events> --num_parts=<num_parts> > quick_run.log &
+```
+
 ## Required configuration before production
 
 Review these hardcoded values before production runs:
@@ -116,6 +123,8 @@ Review these hardcoded values before production runs:
   - `#SBATCH --partition=ada`
   - `#SBATCH --gpus=1`
 
+Note : you must have the access to those partitions/ressources
+
 ### 2) Python environments
 
 - psana env sourced in shell scripts:
@@ -123,6 +132,8 @@ Review these hardcoded values before production runs:
 
 - YOLO python binary used by worker:
   - `YOLO_PYTHON=/sdf/data/lcls/ds/prj/prjlumine22/results/coyote_protector/miniconda3_coyote/envs/env_coyote/bin/python`
+
+Note : you must have the access to prjlumine22 to use this environment.
 
 ### 3) YOLO model + calibration
 
@@ -132,6 +143,8 @@ In `inference_coyote_xtc.py`, verify:
 - `px_size`
 - `dowsamp_factor`
 - `alert_um`
+
+Note : the last 4 values are is setup dependant, please use the operators for the values.
 
 ### 4) Orchestrator paths (CDS ↔ SDF)
 
@@ -170,7 +183,7 @@ sbatch run_export_infer_xtc_parallel.sh \
   RUN_NUMBER=146 \
   EXP_NUMBER=mfx101232725 \
   MAX_EVENTS=80000 \
-  NUM_PARTS=8
+  NUM_PARTS=4
 ```
 
 ---
