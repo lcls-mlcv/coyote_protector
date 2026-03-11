@@ -35,8 +35,7 @@ if not os.path.isdir(chip_pic_dir):
 # Paths / parameters
 # -------------------------
 weights_path = (
-    "/sdf/home/p/pmonteil/coyote_protector_test_PL_labeling_tries_v3_run61_mfx101346325_200_random/scripts/"
-    "runs/detect/train_150epochs_v11_merged/weights/best.pt"
+    "/sdf/data/lcls/ds/prj/prjlumine22/results/pmonteil/coyote/latest_weights/weights_yolov11n_150epochs_merged_dataset.pt"
 )
 
 mag_factor = 5.56     # optical magnification
