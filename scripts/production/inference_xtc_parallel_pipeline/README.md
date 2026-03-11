@@ -139,10 +139,10 @@ Note : you must have the access to prjlumine22 to use this environment.
 
 In `inference_coyote_xtc.py`, verify:
 - `weights_path`
-- `mag_factor`
-- `px_size`
-- `dowsamp_factor`
-- `alert_um`
+- `mag_factor`      # magnification factor from the microscope
+- `px_size`         # real pixel size (in micro meters)
+- `downsamp_factor` # camera downsampling factor (usually 2)
+- `alert_um`        # threshold above which the crystal is considerd to be dangerous for the dector (set artifically low for development purpose)
 
 Note : the last 4 values are is setup dependant, please use the operators for the values.
 
