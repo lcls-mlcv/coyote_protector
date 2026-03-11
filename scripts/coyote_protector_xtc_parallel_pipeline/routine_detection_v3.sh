@@ -16,8 +16,8 @@ NUM_PARTS=4
 # --------------------------------
 
 DEST_HOST="psana.sdf.slac.stanford.edu"
-SDF_BASE="/sdf/data/lcls/ds/mfx/mfx101232725/results/pmonteil/coyote_protector_xtc_gui_ready_test_deployed_modified_chunked"
-RESULTS_BACK_BASE="/cds/home/p/pmonteil/multi_nodes_coyote_processing"
+SDF_BASE="/sdf/data/lcls/ds/mfx/exp_id/results/your/folder/to/process/"  # <-- UPDATE THIS PATH TO YOUR SDF WORKING DIRECTORY
+RESULTS_BACK_BASE="path/to/results_back_on_cds"  # <-- UPDATE THIS PATH TO YOUR LOCAL RESULTS DIRECTORY
 
 # -------  PARSE key=value arguments ---------
 for arg in "$@"; do
