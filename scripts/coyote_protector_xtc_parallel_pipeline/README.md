@@ -3,7 +3,7 @@
 This folder contains the end-to-end workflow used to process LCLS runs, export normalized detector PNGs, run YOLO inference in parallel chunks, and merge trajectory + crystal detection results into final CSV files.
 
 The general workflow is the following:
-- a script is launched from psdev
+- a script is launched from psdev to launch processing on SDF.
 - images and metadata are processed and stored on SDF
 - relevant data (crystal positions) is sent back to psdev as CSV files in a specified folder
 
