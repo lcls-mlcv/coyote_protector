@@ -63,7 +63,7 @@ def main():
     parser.add_argument(
         "--max_events",
         type=int,
-        default=100,
+        default=400,
         help="Maximum events to process (default: 100)"
     )
     parser.add_argument(
