@@ -36,7 +36,7 @@ Now that the folder is on SDF, update these values in `routine_detection_v3.sh`:
 Connect to CDS and go to your CDS folder where you want final results stored, then run:
 
 ```bash
-rsync -av "${USER_NAME}@${DEST_HOST}:/sdf/data/lcls/ds/mfx/exp_id/results/your/folder/to/process/images/coyote_protector_xtc_parallel_pipeline/" ./
+rsync -av "${USER_NAME}@${DEST_HOST}:/sdf/data/lcls/ds/mfx/exp_id/results/your/folder/to/process/images/coyote_protector/scripts/production/inference_xtc_parallel_pipeline/" ./
 ```
 
 4) (Optional) Passwordless SSH setup (CDS -> SDF)
