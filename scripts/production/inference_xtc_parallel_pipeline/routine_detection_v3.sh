@@ -10,9 +10,10 @@ USER="pmonteil"
 RUN_NUMBER=146
 EXP_NUMBER="mfx101232725"
 SAVE_NORMALIZED=1
-MAX_EVENTS=100
+MAX_EVENTS=400
 USE_NORMALIZED=1
 NUM_PARTS=4
+CAMERA_NAME="inline_alvium"
 # --------------------------------
 
 DEST_HOST="psana.sdf.slac.stanford.edu"
@@ -43,6 +44,9 @@ for arg in "$@"; do
         NUM_PARTS=*)
             NUM_PARTS="${arg#*=}"
             ;;
+        CAMERA_NAME=*)
+            CAMERA_NAME="${arg#*=}"
+            ;;
         *)
             echo "[WARN] Unknown argument: $arg"
             ;;
@@ -61,6 +65,7 @@ echo "[INFO] Save Normalized: ${SAVE_NORMALIZED}"
 echo "[INFO] Max Events: ${MAX_EVENTS}"
 echo "[INFO] Use Normalized for Inference: ${USE_NORMALIZED}"
 echo "[INFO] Number of Parts: ${NUM_PARTS}"
+echo "[INFO] Camera Name: ${CAMERA_NAME}"
 echo "[INFO] Results back to: ${RESULTS_BACK_BASE}"
 echo
 
@@ -72,7 +77,7 @@ echo "[STEP 1/3] Launching export_infer_xtc_paralled.sh on SDF..."
 JOB_ID="$(ssh "${USER}@${DEST_HOST}" "bash -lc '
   set -euo pipefail
   cd \"${SDF_BASE}\"
-        jid=\$(sbatch --parsable run_export_infer_xtc_parallel.sh RUN_NUMBER=${RUN_NUMBER} EXP_NUMBER=${EXP_NUMBER} MAX_EVENTS=${MAX_EVENTS} NUM_PARTS=${NUM_PARTS})
+        jid=\$(sbatch --parsable run_export_infer_xtc_parallel.sh RUN_NUMBER=${RUN_NUMBER} EXP_NUMBER=${EXP_NUMBER} MAX_EVENTS=${MAX_EVENTS} NUM_PARTS=${NUM_PARTS} CAMERA_NAME=${CAMERA_NAME})
   echo \$jid
 '")"
 

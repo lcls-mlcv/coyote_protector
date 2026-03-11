@@ -105,7 +105,7 @@ source /cds/group/pcds/pyps/conda/pcds_conda
 
 - Then run :
 ```bash
-python bash_launcher.py --user=<username> --run_number=<run_number> --exp_number=<experiment_id> --max_events=<max_events> --num_parts=<num_parts> > quick_run.log &
+python bash_launcher.py --user=<username> --run_number=<run_number> --exp_number=<experiment_id> --max_events=<max_events> --num_parts=<num_parts> --camera_name=<camera_name> > quick_run.log &
 ```
 
 ## Required configuration before production
@@ -165,7 +165,8 @@ python bash_launcher.py \
   --run_number=146 \
   --exp_number=mfx101232725 \
   --max_events=80000 \
-  --num_parts=4
+  --num_parts=4 \
+  --camera_name=inline_alvium
 ```
 
 Dry-run (prints command only):
@@ -183,7 +184,8 @@ sbatch run_export_infer_xtc_parallel.sh \
   RUN_NUMBER=146 \
   EXP_NUMBER=mfx101232725 \
   MAX_EVENTS=80000 \
-  NUM_PARTS=4
+  NUM_PARTS=4 \
+  CAMERA_NAME=inline_alvium
 ```
 
 ---
@@ -255,7 +257,7 @@ Inside SDF run folder (`run_<RUN_NUMBER>/`):
 ## Minimal reproducible command
 
 ```bash
-sbatch run_export_infer_xtc_parallel.sh RUN_NUMBER=146 EXP_NUMBER=mfx101232725 MAX_EVENTS=100 NUM_PARTS=4
+sbatch run_export_infer_xtc_parallel.sh RUN_NUMBER=146 EXP_NUMBER=mfx101232725 MAX_EVENTS=100 NUM_PARTS=4 CAMERA_NAME=inline_alvium
 ```
 
 When complete, inspect:
@@ -412,17 +414,18 @@ python split_timestamps.py <input_json> <n_parts> <out_dir>
 **CLI input**
 
 ```bash
-python export_xtc_segmented_timestamps.py [run_number] [exp_number] [max_events] [timestamps_json] [original_timestamps_json]
+python export_xtc_segmented_timestamps.py [run_number] [exp_number] [max_events] [camera_name] [timestamps_json] [original_timestamps_json]
 ```
 
 Defaults:
 - `run_number=146`
 - `exp_number=mfx101232725`
 - `max_events=100`
+- `camera_name=inline_alvium`
 
 **Reads**
 - XTC stream through psana detectors:
-  - camera: `inline_alvium`
+  - camera: `camera_name` argument (default `inline_alvium`)
   - trajectories: `XTRAJ`, `YTRAJ`
 - Optional timestamp subset file: `[timestamps_json]`
 - Optional global timestamp file for stable ID mapping: `[original_timestamps_json]`
@@ -525,6 +528,7 @@ Merged columns:
 - `EXP_NUMBER`
 - `MAX_EVENTS`
 - `PART_INDEX`
+- `CAMERA_NAME`
 - `TIMESTAMP_FILE`
 - `ORIGINAL_TIMESTAMP_FILE`
 
@@ -548,6 +552,7 @@ Merged columns:
 - `EXP_NUMBER`
 - `MAX_EVENTS`
 - `NUM_PARTS`
+- `CAMERA_NAME`
 
 **Reads**
 - Calls and consumes outputs from:
@@ -572,7 +577,7 @@ Merged columns:
 
 **Runtime inputs**
 - Via launcher args or key=value passthrough:
-  - `USER`, `RUN_NUMBER`, `EXP_NUMBER`, `MAX_EVENTS`, `NUM_PARTS`
+  - `USER`, `RUN_NUMBER`, `EXP_NUMBER`, `MAX_EVENTS`, `NUM_PARTS`, `CAMERA_NAME`
 
 **Reads**
 - Remote folder `SDF_BASE` and generated run outputs on SDF

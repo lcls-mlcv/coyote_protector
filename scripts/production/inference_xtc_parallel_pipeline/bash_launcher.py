@@ -80,6 +80,11 @@ def main():
         help="Number of parallel parts to divide the workflow (default: 4)"
     )
     parser.add_argument(
+        "--camera_name",
+        default="inline_alvium",
+        help="Psana detector name for the inline camera (default: inline_alvium)"
+    )
+    parser.add_argument(
         "--dry_run",
         action="store_true",
         help="Print command without executing"
@@ -105,6 +110,7 @@ def main():
         "MAX_EVENTS={}".format(args.max_events),
         "USE_NORMALIZED={}".format(args.use_normalized),
         "NUM_PARTS={}".format(args.num_parts),
+        "CAMERA_NAME={}".format(args.camera_name),
     ]
 
     print("[INFO] ============================================")
@@ -117,6 +123,7 @@ def main():
     print("[INFO] Max Events: {}".format(args.max_events))
     print("[INFO] Use Normalized: {}".format(args.use_normalized))
     print("[INFO] Num Parts: {}".format(args.num_parts))
+    print("[INFO] Camera Name: {}".format(args.camera_name))
     print("[INFO] ============================================")
     print()
 

@@ -22,8 +22,9 @@ PSCONDA_SH="/sdf/group/lcls/ds/ana/sw/conda2/manage/bin/psconda.sh"
 # -------  DEFAULT INPUTS ---------
 RUN_NUMBER=146
 EXP_NUMBER="mfx101232725"
-MAX_EVENTS=100
+MAX_EVENTS=400
 NUM_PARTS=4
+CAMERA_NAME="inline_alvium"
 # --------------------------------
 
 for arg in "$@"; do
@@ -32,11 +33,12 @@ for arg in "$@"; do
         EXP_NUMBER=*) EXP_NUMBER="${arg#*=}" ;;
         MAX_EVENTS=*) MAX_EVENTS="${arg#*=}" ;;
         NUM_PARTS=*) NUM_PARTS="${arg#*=}" ;;
+        CAMERA_NAME=*) CAMERA_NAME="${arg#*=}" ;;
         *) echo "[WARN] Unknown argument: $arg" ;;
     esac
 done
 
-echo "[MASTER] run=${RUN_NUMBER} exp=${EXP_NUMBER} max_events=${MAX_EVENTS} parts=${NUM_PARTS}"
+echo "[MASTER] run=${RUN_NUMBER} exp=${EXP_NUMBER} max_events=${MAX_EVENTS} parts=${NUM_PARTS} camera=${CAMERA_NAME}"
 
 MASTER_START=$(date +%s.%N)
 
@@ -80,7 +82,7 @@ for i in $(seq 0 $((NUM_PARTS-1))); do
     PART_DIR="part_${i}"
     mkdir -p "${PART_DIR}"
     TIMESTAMP_FILE="$(pwd)/timestamps_parts/timestamps_part_${i}.json"
-    jid=$(sbatch --parsable --chdir=$(pwd)/${PART_DIR} ../run_export_infer_worker.sh RUN_NUMBER=${RUN_NUMBER} EXP_NUMBER=${EXP_NUMBER} MAX_EVENTS=${MAX_EVENTS} PART_INDEX=${i} TIMESTAMP_FILE=${TIMESTAMP_FILE} ORIGINAL_TIMESTAMP_FILE=${ORIGINAL_TS_FILE})
+    jid=$(sbatch --parsable --chdir=$(pwd)/${PART_DIR} ../run_export_infer_worker.sh RUN_NUMBER=${RUN_NUMBER} EXP_NUMBER=${EXP_NUMBER} MAX_EVENTS=${MAX_EVENTS} PART_INDEX=${i} CAMERA_NAME=${CAMERA_NAME} TIMESTAMP_FILE=${TIMESTAMP_FILE} ORIGINAL_TIMESTAMP_FILE=${ORIGINAL_TS_FILE})
     echo "[MASTER] Submitted worker ${i} → job ${jid}"
     WORKER_IDS+=("${jid}")
 done

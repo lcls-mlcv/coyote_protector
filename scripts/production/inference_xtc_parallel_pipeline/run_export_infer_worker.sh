@@ -18,8 +18,9 @@ YOLO_PYTHON="/sdf/data/lcls/ds/prj/prjlumine22/results/coyote_protector/minicond
 # Defaults (overridden via args)
 RUN_NUMBER=146
 EXP_NUMBER="mfx101232725"
-MAX_EVENTS=100
+MAX_EVENTS=400
 PART_INDEX=0
+CAMERA_NAME="inline_alvium"
 TIMESTAMP_FILE=""
 ORIGINAL_TIMESTAMP_FILE=""
 
@@ -31,6 +32,7 @@ for arg in "$@"; do
         PART_INDEX=*) PART_INDEX="${arg#*=}" ;;
         TIMESTAMP_FILE=*) TIMESTAMP_FILE="${arg#*=}" ;;
         ORIGINAL_TIMESTAMP_FILE=*) ORIGINAL_TIMESTAMP_FILE="${arg#*=}" ;;
+        CAMERA_NAME=*) CAMERA_NAME="${arg#*=}" ;;
         *) echo "[WARN] Unknown argument: $arg" ;;
     esac
 done
@@ -47,7 +49,7 @@ set -u
 # Run export for this part (script is two levels up)
 echo "[WORKER ${PART_INDEX}] === EXPORT PHASE START ==="
 EXPORT_START=$(date +%s.%N)
-python ../../export_xtc_segmented_timestamps.py ${RUN_NUMBER} ${EXP_NUMBER} ${MAX_EVENTS} "${TIMESTAMP_FILE}" "${ORIGINAL_TIMESTAMP_FILE}"
+python ../../export_xtc_segmented_timestamps.py ${RUN_NUMBER} ${EXP_NUMBER} ${MAX_EVENTS} "${CAMERA_NAME}" "${TIMESTAMP_FILE}" "${ORIGINAL_TIMESTAMP_FILE}"
 EXPORT_END=$(date +%s.%N)
 EXPORT_DURATION=$(echo "$EXPORT_END - $EXPORT_START" | bc -l)
 echo "[WORKER ${PART_INDEX}] === EXPORT PHASE END (${EXPORT_DURATION} seconds) ==="

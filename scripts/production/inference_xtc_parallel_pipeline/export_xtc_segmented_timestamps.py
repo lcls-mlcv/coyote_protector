@@ -15,6 +15,7 @@ from psana import DataSource
 DEFAULT_RUN = 146
 DEFAULT_EXP = "mfx101232725"
 DEFAULT_MAX_EVENTS = 100
+DEFAULT_CAMERA = "inline_alvium"
 DEFAULT_TIMESTAMPS = None
 DEFAULT_ORIGINAL_TIMESTAMPS = None
 
@@ -24,14 +25,16 @@ if argc == 1:
     run_number = DEFAULT_RUN
     exp = DEFAULT_EXP
     max_events = DEFAULT_MAX_EVENTS
+    camera_name = DEFAULT_CAMERA
     timestamps_json = DEFAULT_TIMESTAMPS
     original_timestamps_json = DEFAULT_ORIGINAL_TIMESTAMPS
-elif argc in (2, 3, 4, 5, 6):
+elif argc in (2, 3, 4, 5, 6, 7):
     run_number = int(sys.argv[1])
     exp = sys.argv[2] if argc >= 3 else DEFAULT_EXP
     max_events = int(sys.argv[3]) if argc >= 4 else DEFAULT_MAX_EVENTS
-    timestamps_json = sys.argv[4] if argc >= 5 else DEFAULT_TIMESTAMPS
-    original_timestamps_json = sys.argv[5] if argc >= 6 else DEFAULT_ORIGINAL_TIMESTAMPS
+    camera_name = sys.argv[4] if argc >= 5 else DEFAULT_CAMERA
+    timestamps_json = sys.argv[5] if argc >= 6 else DEFAULT_TIMESTAMPS
+    original_timestamps_json = sys.argv[6] if argc >= 7 else DEFAULT_ORIGINAL_TIMESTAMPS
 else:
     print(
         "Usage:\n"
@@ -39,12 +42,13 @@ else:
         "  python export_xtc_segmented_timestamps.py <run_number>\n"
         "  python export_xtc_segmented_timestamps.py <run_number> <exp_number>\n"
         "  python export_xtc_segmented_timestamps.py <run_number> <exp_number> <max_events>\n"
-        "  python export_xtc_segmented_timestamps.py <run_number> <exp_number> <max_events> <timestamps_json>\n"
-        "  python export_xtc_segmented_timestamps.py <run_number> <exp_number> <max_events> <timestamps_json> <original_timestamps_json>\n"
+        "  python export_xtc_segmented_timestamps.py <run_number> <exp_number> <max_events> <camera_name>\n"
+        "  python export_xtc_segmented_timestamps.py <run_number> <exp_number> <max_events> <camera_name> <timestamps_json>\n"
+        "  python export_xtc_segmented_timestamps.py <run_number> <exp_number> <max_events> <camera_name> <timestamps_json> <original_timestamps_json>\n"
     )
     sys.exit(1)
 
-print(f"[CONFIG] exp={exp} run={run_number} max_events={max_events} timestamps_json={timestamps_json} original_timestamps_json={original_timestamps_json}")
+print(f"[CONFIG] exp={exp} run={run_number} max_events={max_events} camera_name={camera_name} timestamps_json={timestamps_json} original_timestamps_json={original_timestamps_json}")
 
 # -------------------------
 # Load timestamps from JSON
@@ -79,7 +83,7 @@ else:
 myrun = next(ds.runs())
 
 # Get detectors
-cam = myrun.Detector("inline_alvium")
+cam = myrun.Detector(camera_name)
 xtraj = myrun.Detector("XTRAJ")
 ytraj = myrun.Detector("YTRAJ")
 
