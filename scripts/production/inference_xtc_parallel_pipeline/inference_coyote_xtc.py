@@ -41,8 +41,8 @@ weights_path = (
 
 mag_factor = 5.56     # optical magnification
 px_size = 3.45        # pixel size (μm)
-dowsamp_factor = 2    # if images were downsampled before inference
-px_to_um = px_size * dowsamp_factor / mag_factor
+downsamp_factor = 2    # if images were downsampled before inference
+px_to_um = px_size * downsamp_factor / mag_factor
 alert_um = 50.0       # threshold, in μm, above which to flag detections
 
 # Output CSV directory
