@@ -140,7 +140,7 @@ Note : you must have the access to prjlumine22 to use this environment, will be 
 
 ### 3) YOLO model + calibration
 
-In `inference_coyote_xtc.py`, verify:
+In `inference_coyote_xtc.py` on SDF, verify:
 - `weights_path`
 - `mag_factor`      # magnification factor from the microscope
 - `px_size`         # real pixel size (in micro meters)
