@@ -42,7 +42,7 @@ mag_factor = 5.56     # optical magnification
 px_size = 3.45        # pixel size (μm)
 downsamp_factor = 2    # if images were downsampled before inference
 px_to_um = px_size * downsamp_factor / mag_factor
-alert_um = 50.0       # threshold, in μm, above which to flag detections
+alert_um = 5.0       # threshold, in μm, above which to flag detections, set very low for development/testing purpose
 
 # Output CSV directory
 out_dir = Path("results_csv")
