@@ -16,8 +16,8 @@ CAMERA_NAME="inline_alvium"
 # --------------------------------
 
 DEST_HOST="psana.sdf.slac.stanford.edu"
-SDF_BASE="/sdf/home/p/pmonteil/coyote_protector_xtc_gui_ready_test"
-RESULTS_BACK_BASE="/cds/home/p/pmonteil"
+SDF_BASE="/sdf/data/lcls/ds/mfx/${EXP_NUMBER}/results/coyote_protector/scripts/production/inference_xtc_parallel_pipeline"  # <-- UPDATE THIS PATH TO YOUR SDF WORKING DIRECTORY
+RESULTS_BACK_BASE="/cds/data/iocDatas/..../..../"  # <-- UPDATE THIS PATH TO YOUR LOCAL RESULTS DIRECTORY
 
 # -------  PARSE key=value arguments ---------
 for arg in "$@"; do
