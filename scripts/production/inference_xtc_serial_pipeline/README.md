@@ -3,7 +3,7 @@
 This folder contains the end-to-end serial workflow used to process LCLS runs, export detector PNGs, run YOLO inference, and merge trajectory + crystal detection results into final CSV files.
 
 The general workflow is the following:
-- a script is launched from CDS to launch processing on SDF (optional)
+- a script is launched from CDS to launch processing on SDF
 - images and metadata are processed on SDF
 - relevant CSV outputs can be copied back to CDS
 
@@ -17,7 +17,7 @@ This folder hosts the code and output of processing (images, logs, and CSV files
 
 - SSH to psana and run:
 ```bash
-mkdir -p "/sdf/data/lcls/ds/mfx/<exp_id>/results/your/folder/to/process/images"
+mkdir -p "/sdf/data/lcls/ds/mfx/${EXP_NUMBER}/results/"
 ```
 
 2) Clone the full repo, then navigate to the serial production folder:
@@ -66,7 +66,7 @@ ssh-copy-id <username>@psana.sdf.slac.stanford.edu
 ssh <username>@psana.sdf.slac.stanford.edu
 ```
 
-6) Run from CDS (optional orchestrator path):
+6) Run from CDS:
 
 ```bash
 source /cds/group/pcds/pyps/conda/pcds_conda
@@ -93,7 +93,7 @@ Review these hardcoded values before production runs.
   - `#SBATCH --partition=turing`
   - `#SBATCH --gpus=1`
 
-You must have access to these resources.
+You must have access to these resources and projects.
 
 ### 2) Python environments
 
@@ -125,53 +125,7 @@ In `routine_detection_v3.sh`, verify:
 
 ## Run options
 
-## A) Recommended: full serial workflow on SDF
-
-```bash
-sbatch run_export_infer_xtc.sh \
-  RUN_NUMBER=61 \
-  EXP_NUMBER=mfx101346325 \
-  SAVE_NORMALIZED=1 \
-  MAX_EVENTS=80000 \
-  USE_NORMALIZED=1 \
-  CAMERA_NAME=inline_alvium
-```
-
-This is the most reliable path because it keeps export, inference, and merge in one job and one working directory.
-
-What it does:
-- creates `run_<RUN_NUMBER>/`
-- `cd` into `run_<RUN_NUMBER>/`
-- exports images + `results_csv/event_data.csv`
-- runs inference and writes `results_csv/measurements_*.csv`
-- merges to `results_csv/merged_crystals.csv`
-
-## B) Export only
-
-```bash
-sbatch run_export_xtc.sh \
-  RUN_NUMBER=61 \
-  EXP_NUMBER=mfx101346325 \
-  SAVE_NORMALIZED=1 \
-  MAX_EVENTS=80000 \
-  CAMERA_NAME=inline_alvium
-```
-
-Note: this script does not create `run_<RUN_NUMBER>/` before export. It writes image folders (`run_<RUN_NUMBER>_png*`) and `results_csv/event_data.csv` relative to the directory where the job runs.
-
-## C) Inference + merge only (after export)
-
-```bash
-sbatch run_inference_xtc.sh RUN_NUMBER=61 USE_NORMALIZED=1
-```
-
-Important behavior:
-- `run_inference_xtc.sh` expects images under `run_<RUN_NUMBER>/run_<RUN_NUMBER>_png_norm` (or `_png`)
-- `inference_coyote_xtc.py` and `merge_crystals_data.py` write/read `results_csv` in the current working directory
-
-So this script is only safe if your current directory and exported image layout are consistent with those assumptions.
-
-## D) Launch from CDS with Python wrapper
+## A) Launch from CDS with Python wrapper
 
 ```bash
 python bash_launcher.py \
@@ -191,6 +145,51 @@ python bash_launcher.py --dry_run
 ```
 
 This calls `routine_detection_v3.sh`, which submits `run_export_infer_xtc.sh` on SDF and copies back `run_<run>/results_csv/`.
+
+## B) Recommended: full serial workflow on SDF
+
+```bash
+sbatch run_export_infer_xtc.sh \
+  RUN_NUMBER=61 \
+  EXP_NUMBER=mfx101346325 \
+  SAVE_NORMALIZED=1 \
+  MAX_EVENTS=80000 \
+  USE_NORMALIZED=1 \
+  CAMERA_NAME=inline_alvium
+```
+
+What it does:
+- creates `run_<RUN_NUMBER>/`
+- `cd` into `run_<RUN_NUMBER>/`
+- exports images + `results_csv/event_data.csv`
+- runs inference and writes `results_csv/measurements_*.csv`
+- merges to `results_csv/merged_crystals.csv`
+
+## C) Export only
+
+```bash
+sbatch run_export_xtc.sh \
+  RUN_NUMBER=61 \
+  EXP_NUMBER=mfx101346325 \
+  SAVE_NORMALIZED=1 \
+  MAX_EVENTS=80000 \
+  CAMERA_NAME=inline_alvium
+```
+
+Note: this script does not create `run_<RUN_NUMBER>/` before export. It writes image folders (`run_<RUN_NUMBER>_png*`) and `results_csv/event_data.csv` relative to the directory where the job runs.
+
+## D) Inference + merge only (after export)
+
+```bash
+sbatch run_inference_xtc.sh RUN_NUMBER=61 USE_NORMALIZED=1
+```
+
+Important behavior:
+- `run_inference_xtc.sh` expects images under `run_<RUN_NUMBER>/run_<RUN_NUMBER>_png_norm` (or `_png`)
+- `inference_coyote_xtc.py` and `merge_crystals_data.py` write/read `results_csv` in the current working directory
+
+So this script is only safe if your current directory and exported image layout are consistent with those assumptions.
+
 
 ## Monitoring and logs
 
