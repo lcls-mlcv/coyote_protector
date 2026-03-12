@@ -31,7 +31,7 @@ run_number = int(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_RUN
 results_csv_dir = Path(f"run_{run_number}/results_csv")
 results_csv_dir = Path("results_csv")
 event_data_csv = results_csv_dir / "event_data.csv"
-measurements_csv = results_csv_dir / "measurements_complete.csv"
+measurements_csv = results_csv_dir / "measurements_above_threshold.csv"
 
 # Check if files exist
 if not event_data_csv.exists():
