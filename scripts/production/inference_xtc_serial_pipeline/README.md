@@ -1,3 +1,5 @@
+# OBSOLETE VERSION KEPT FOR LEGACY PURPOSE
+
 # Coyote Protector Serial Workflow
 
 This folder contains the end-to-end serial workflow used to process LCLS runs, export detector PNGs, run YOLO inference, and merge trajectory + crystal detection results into final CSV files.
