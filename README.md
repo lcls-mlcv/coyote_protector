@@ -13,14 +13,11 @@ Use this repository to:
 
 ## High-level repository map
 
-```text
-coyote_protector/
-|- scripts/model_dev/    # R&D workflows: data prep, training, inference, evaluation
-|- scripts/production/   # Production XTC pipelines (parallel + legacy serial)
-|- models/               # Benchmark reports, model comparison context, archived results
-|- yolov8_cpp/           # C++ ONNX Runtime inference path
-`- requirements.txt      # Python dependencies for development/benchmarking
-```
+- `scripts/model_dev/` - R&D workflows: data prep, training, inference, and evaluation.
+- `scripts/production/` - Production XTC pipelines (parallel and legacy serial).
+- `models/` - Benchmark reports, model-comparison context, and archived results.
+- `yolov8_cpp/` - C++ inference path with ONNX Runtime.
+- `requirements.txt` - Python dependencies for development and benchmarking.
 
 ## What to use and when
 
